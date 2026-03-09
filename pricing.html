@@ -43,19 +43,16 @@
     </a>
     <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="services.html">Services</a>
+    <a href="about.html">About Us</a>
+    <a href="reviews.html">Reviews</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="tel:021823110" class="btn btn-blue btn-lg">Call 021 823 110</a>
+  </div>
 </nav>
-
-<!-- MOBILE NAV -->
-<div class="mobile-nav" id="mobileNav">
-  <span class="mobile-nav-close" id="mobileNavClose">&times;</span>
-  <a href="services.html">Services</a>
-  <a href="about.html">About Us</a>
-  <a href="reviews.html">Reviews</a>
-  <a href="pricing.html">Pricing</a>
-  <a href="faq.html">FAQ</a>
-  <a href="contact.html">Contact</a>
-  <a href="tel:021823110" class="btn btn-blue btn-lg">Call 021 823 110</a>
-</div>
 
 <!-- PAGE HERO -->
 <div class="wrap">
@@ -69,30 +66,68 @@
 <!-- PRICING SECTION -->
 <section style="padding:0 0 96px">
   <div class="wrap">
+    <!-- Row 1 -->
     <div class="pricing-row">
       <div class="price-card reveal">
-        <div class="price-cat">Apprentice / Labourer</div>
-        <div class="price-name">Support Rate</div>
+        <div class="price-cat">Apprentice</div>
+        <div class="price-name">Apprentice Rate</div>
         <div class="price-rate"><sup>$</sup>60</div>
         <div class="price-unit">per hour · incl. GST</div>
-        <p class="price-note">For assisted work alongside a qualified technician.</p>
+        <p class="price-note">For apprentice work alongside a qualified tradesperson.</p>
       </div>
       <div class="price-card hero-card reveal d1">
         <div class="price-chip">Most Common</div>
-        <div class="price-cat">Qualified Plumber</div>
+        <div class="price-cat">Technician / Tradesperson</div>
         <div class="price-name">Standard Rate</div>
         <div class="price-rate"><sup>$</sup>100</div>
         <div class="price-unit">per hour · incl. GST</div>
         <p class="price-note">All qualified plumbing, gas fitting, and drain work during business hours.</p>
       </div>
       <div class="price-card reveal d2">
-        <div class="price-cat">Nights, Weekends &amp; Public Holidays</div>
-        <div class="price-name">After Hours</div>
-        <div class="price-rate"><sup>$</sup>150</div>
-        <div class="price-unit">per hour · 2-hr minimum</div>
-        <p class="price-note">Emergency callouts. 2-hour minimum charge applies.</p>
+        <div class="price-cat">Labourer</div>
+        <div class="price-name">Labourer Rate</div>
+        <div class="price-rate"><sup>$</sup>60</div>
+        <div class="price-unit">per hour · incl. GST</div>
+        <p class="price-note">General labour support on site alongside a qualified technician.</p>
       </div>
     </div>
+
+    <!-- Row 2 -->
+    <div class="pricing-row">
+      <div class="price-card reveal">
+        <div class="price-cat">Per Job</div>
+        <div class="price-name">Vehicle Service Charge</div>
+        <div class="price-rate"><sup>$</sup>25</div>
+        <div class="price-unit">per job · incl. GST</div>
+        <p class="price-note">Charged once per job to cover vehicle running and travel costs.</p>
+      </div>
+      <div class="price-card reveal d1">
+        <div class="price-cat">Nights, Weekends &amp; Public Holidays</div>
+        <div class="price-name">After Hours Call Out</div>
+        <div class="price-rate"><sup>$</sup>150</div>
+        <div class="price-unit">per hour · min. 2 hours</div>
+        <p class="price-note">Emergency callouts outside business hours. 2-hour minimum charge applies.</p>
+      </div>
+      <div class="price-card reveal d2">
+        <div class="price-cat">Per Reminder</div>
+        <div class="price-name">Overdue Invoice Charge</div>
+        <div class="price-rate"><sup>$</sup>25</div>
+        <div class="price-unit">per reminder · incl. GST</div>
+        <p class="price-note">Applied to each overdue invoice reminder sent.</p>
+      </div>
+    </div>
+
+    <!-- Row 3: Drain Jetting -->
+    <div class="pricing-row" style="grid-template-columns:1fr">
+      <div class="price-card reveal" style="max-width:420px;margin:0 auto;width:100%">
+        <div class="price-cat">Specialist Equipment</div>
+        <div class="price-name">Drain Jetting Machine Hire with Technician</div>
+        <div class="price-rate"><sup>$</sup>225</div>
+        <div class="price-unit">first hour · incl. GST</div>
+        <p class="price-note">Includes technician and machine for the first hour. Standard hourly rate applies for each hour after that.</p>
+      </div>
+    </div>
+
     <div class="price-footer reveal">
       <strong>All prices include GST.</strong> Materials charged separately at cost. For larger jobs — bathrooms, new builds, commercial — <strong>contact us for a written quote</strong> before any work begins.
     </div>
@@ -178,12 +213,23 @@
 // Mobile nav
 const burger = document.getElementById('burger');
 const mNav = document.getElementById('mobileNav');
-const mClose = document.getElementById('mobileNavClose');
-function openNav(){mNav.classList.add('open');burger.classList.add('open');document.body.style.overflow='hidden'}
-function closeNav(){mNav.classList.remove('open');burger.classList.remove('open');document.body.style.overflow=''}
-burger.addEventListener('click', openNav);
-mClose.addEventListener('click', closeNav);
-mNav.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeNav));
+burger.addEventListener('click', () => {
+  mNav.classList.toggle('open');
+  burger.classList.toggle('open');
+});
+mNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  mNav.classList.remove('open');
+  burger.classList.remove('open');
+}));
+document.addEventListener('click', e => {
+  if (!burger.contains(e.target) && !mNav.contains(e.target)) {
+    mNav.classList.remove('open');
+    burger.classList.remove('open');
+  }
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { mNav.classList.remove('open'); burger.classList.remove('open'); }
+});
 
 // Scroll reveal
 const ro = new IntersectionObserver(entries=>{
